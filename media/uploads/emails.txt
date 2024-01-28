@@ -1,0 +1,19 @@
+shubhams email id is shubhampanchal@gmail.com 
+test@yahoo.com is a test mail
+for training purpose use train@hotmail.com only
+
+
+_________________________________________________________________________________________________________
+Solution:
+_________________________________________________________________________________________________________
+
+
+text = open("emails.txt","r")
+emails = []
+for lines in text.readlines():
+    words = lines.split(" ")
+    for word in words:
+        if "@" in word and word.endswith(".com"):
+            emails.append(word)
+_________________________________________________________________________________________________________
+_________________________________________________________________________________________________________
