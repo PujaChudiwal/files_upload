@@ -1,12 +1,16 @@
 from django.contrib import admin
-
-# Register your models here.
-
-
+from django.http import HttpResponse
 from .models import Blog
 
 
+# Register your models here.
+
 class YourModelAdmin(admin.ModelAdmin):
-    list_display = ["file_upload"]  # Add any other fields you want to display
+    list_display = ("name", "file_upload") # Add any other fields you want to display
+
+
+
+
+
 
 admin.site.register(Blog, YourModelAdmin)
