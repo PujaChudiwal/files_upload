@@ -1,7 +1,7 @@
 from django import forms
-from .models import Blog
+from .models import File
 
-class BlogForm(forms.ModelForm):
+class FileForm(forms.ModelForm):
     class Meta:
-        model = Blog
+        model = File
         fields = ['name', 'file_upload']

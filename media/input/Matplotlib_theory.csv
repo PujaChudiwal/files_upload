@@ -1,0 +1,16 @@
+Unnamed: 0,Unnamed: 1,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6,Unnamed: 7,Unnamed: 8,Unnamed: 9,Unnamed: 10
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+***,Construct your dataset:,,,,,,,,,Creating Different Types of Plots
+,,1.0,Construct dataset,,,,,,,1. Line Graph
+,,2.0,Collecting data,,,,,,,2. Bar chart
+,,3.0,Sampling and splitting data,,,,,,,3. Histograms
+,,,,,,,,,,4. Scatter Plot
+,,,,,,,,,,5. Pie Chart
+***,Transform your data:,,,,,,,,,6. 3D Plots
+,,1.0,Transforming Numeric Data,,,,,,,
+,,,,1.1,Normalization,,,,,
+,,,,1.2,Bucketing,,,,,
+,,2.0,Transforming Categorical  Data,,,,,,,

@@ -1,0 +1,212 @@
+Date and Time Function
+
+--getdate 
+select getdate() as Todays_date-- Todays date
+
+select getdate() -1 as Yesterday_date --Yesterday date 
+
+select getdate() +1 as Tomorrow_date --Tomorrow date 
+
+select getdate() +2
+
+--There are three diffrent functions in SQL to modify or perform any date related task
+--1.DATEDIFF()
+--2.DATEPART()
+--3.DATEADD()
+
+--1.datediff() function
+--The datediff function requires 3 argument(s).
+--If we provide more than 3 arguments then it will through an exception 
+
+--(YY,MM,DD,HH,Minutes and seconds)
+
+select DATEDIFF(YYYY,'1987/09/13','2021/09/13')
+
+select DATEDIFF(HH,getdate(),GETDATE()+2)
+--syntax : DATEDIFF(interval,date1,date2)
+
+--interval
+--Year,YYYY, YY = Year
+--Quarter,QQ, Q = Quarter
+--Month - MM, M = Month
+--DAYOFYEAR - day of the year
+--DAY,dy,y = day
+--WEEK,WW,WK = weekday
+--HOUR,HH = hour
+--MINUTE,MI,N = Minute
+--SECOND,SS,S = Second 
+--MILISECOND , MS = Millisecond
+
+
+select datediff(MINUTE,'2015/01/01','2021/08/01')
+
+--Q.HOW  to calculate your age ?
+
+select DATEDIFF(YY,'1992/08/15',getdate()) as Present_Age
+
+
+select DATEDIFF(YEAR,'MONTH',getdate()) as Present_Age
+
+Create table Account_details (
+ACCT_NUMBER int primary key identity(11112881,1),
+ACCT_NAME varchar(20),
+ACCT_OPEN_DATE date,
+BRANCH Varchar(20))
+
+insert into Account_details values ('Shubham','2015/12/09','MUMBAI')
+insert into Account_details values ('Rihan','2016/01/12','Jaipur')
+insert into Account_details values ('Sheetal','2017/08/11','GOA')
+insert into Account_details values ('Priyanka','2017/01/01','Chennai')
+insert into Account_details values ('Manik','2015/01/08','Agra')
+insert into Account_details values ('Veena','2021/01/01','Patna')
+insert into Account_details values ('Rohan','2019/07/01','Pune')
+insert into Account_details values ('Laxmi',GETDATE(),'rohatak')
+insert into Account_details values ('Jinal',GETDATE(),'Indore')
+
+select * from Account_details
+
+
+select * from Account_details
+
+select GETDATE()
+
+select ACCT_NUMBER,ACCT_NAME,ACCT_OPEN_DATE , DATEDIFF(MM,ACCT_OPEN_DATE,GETDATE()) as Ageofaccount from Account_details
+where DATEDIFF(yy,ACCT_OPEN_DATE,GETDATE()) >1
+
+
+--Q.What is the age of your bank account
+
+select ACCT_NUMBER, ACCT_NAME, DATEDIFF(YY,ACCT_OPEN_DATE,getdate()) as ACCOUNT_AGE from Account_details
+
+--Q.Calculate the no of accounts which is opened during the current year.
+
+select count(*) from Account_details
+where DATEDIFF(YY,ACCT_OPEN_DATE,getdate()) =0
+
+--2.DATEPART
+--This will allow you to display the date part 
+--Syntax : DATEPART(interval,date/column_name)
+
+select getdate()
+select DATEPART(HH,GETDATE())
+
+select * from Account_details
+select *,datepart(YY,ACCT_OPEN_DATE) as date from Account_details where datepart(YY,ACCT_OPEN_DATE) =2021  
+
+select * from Account_details where ACCT_OPEN_DATE in ('2021')
+
+--if we want to validate date related column which is in terms of timestamp 
+--and it is very difficult to mention each and every time stamp related column with every date
+--in order to avoid that we can use date part so it will consider with mentioned interval.
+
+select count(*) from Account_details where DATEPART(YY,ACCT_OPEN_DATE) in ('2021','2015')
+
+select datepart(yy,getdate()) as years, datepart(MM,getdate()) as months  --- yers and months
+
+--3.DATEADD()
+--it will allow you to add the dates.
+--it will accept three arguments.
+--syntax : DATEADD(interval,value,date/datecolumn)
+
+select DATEADD(DD,30,GETDATE()) as after30days
+
+
+--Null Value replcement
+--We can replace NUll values from column by using three fuctions
+--1.ISNULL()
+--2.Coalesce()
+--3.Case()
+
+create table NULL_TEST(NID int, EMP_NAME varchar(20),Manager varchar(20))
+
+insert into NULL_TEST values (1,'Piya','Sohan')
+insert into NULL_TEST values (2,'kate',NULL)
+insert into NULL_TEST values (3,'meera','aman')
+insert into NULL_TEST values (4,'amit',NULL)
+insert into NULL_TEST values (5,'sumit','Kiran')
+
+select * from NULL_TEST
+--1.ISNULL()
+  
+ --1.ISNULL()
+ --This function will help us to replace NULL value with any other user defined value.
+ --synatx: ISNULL(Colname,'String')
+ --It will accept Two arguments 
+
+ --NVL - SQL DEVELOPER _ Oracle
+ --IFNULL - MySql 
+
+select NID,EMP_NAME, ISNULL(Manager,'No Manager') AS MangerDetails from NULL_TEST
+
+insert into NULL_TEST values (1,'Piya','Sohan')
+
+--CLASS-19
+--2.COALESCE 
+--It will find or try to locate first appearance of NON-NULL value from a row of table.
+--If it is not possible to find or locate NON-NULL value then it always returns a NULL value.
+--If there are any blank or empty spaces then it will display space in result because space is not considered as NULL value.
+
+--syntax:COALESCE (col1,col2,....coln)
+
+create table COALESCE_TEST (CID int,FN varchar(20),MN varchar(20),LN varchar(20), sal int)
+
+
+insert into COALESCE_TEST values (1,'A',NULL,NULL,200)
+insert into COALESCE_TEST values (2,NULL,'B',NULL,450)
+insert into COALESCE_TEST values (3,NULL,NULL,'C',200)
+insert into COALESCE_TEST values (4,'',NULL,'D',200)
+insert into COALESCE_TEST values (5,'E','F','G',200)
+insert into COALESCE_TEST values (6,NULL,NULL,NULL,500)
+insert into COALESCE_TEST values (NULL,NULL,NULL,'H',500)
+select * from COALESCE_TEST
+
+delete from COALESCE_TEST where cid is null
+select cid,coalesce(FN,MN,LN) as NonNullValue,sal from COALESCE_TEST
+
+select coalesce(cid,FN,MN,LN) as NonNullValue,sal from COALESCE_TEST
+
+select coalesce(FN,MN,LN,cid) as NonNullValue,sal from COALESCE_TEST
+
+select coalesce(cid,sal,FN,MN,LN) as NonNullValue from COALESCE_TEST
+
+select coalesce(NULL,NULL,NULL,'SCODEEN')
+
+select coalesce(NULL,5,NULL,'SCODEEN',3)
+
+select coalesce(NULL,NULL,'SCODEEN',3)
+select coalesce(NULL,NULL,'SCODEEN',5) --exception :Conversion failed when converting the varchar value 'SCODEEN' to data type int.
+
+
+--3.Case statement
+--Case statement identify the condition and returns a values.
+--It will work like IF-ELSE statement
+--If there is no ELSE statement then it will return NULL Value .
+
+--Synatx
+--case 
+--	WHEN condtion then result1
+--	WHEN condtion then result2
+--	ELSE result 
+--END
+
+select * from NULL_TEST
+
+select NID,EMP_NAME ,
+				CASE
+				when manager is NULL then 'NO Manager is present'  
+				ELSE Manager
+				END
+from NULL_TEST
+
+select * from NULL_TEST
+
+update NULL_TEST SET Manager =
+					Case 
+					when NID =2 then 'PIYA'
+					when NID =4 then 'AMIT'
+					else Manager
+					END
+
+
+
+

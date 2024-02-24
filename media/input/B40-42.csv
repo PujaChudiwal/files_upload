@@ -1,0 +1,203 @@
+create table employee
+(EID int,
+FirstName varchar(20),
+LastName varchar(20),
+Loc varchar(20),
+Dept varchar(20),
+salary int)
+
+insert into employee values (1,'Rohan','Mane','Sangali','HR',15000)
+insert into employee values (2,'Sheetal','Chavan','Parbhani','Finance',25000)
+insert into employee values (3,'Amit','Patil','Latur','HR',16000)
+insert into employee values (4,'Riya','Verma','Pune','Account',20000)
+insert into employee values (5,'Sita','Sharma','Patna','HR',15000)
+insert into employee values (6,'Kirti','Gold','Solapur','Staffing',35000)
+insert into employee values (7,'Sohan','Jadhav','Miraj','Account',45000)
+insert into employee values (8,'Priyanka','Sharma','Nagpur','Finance',46000)
+insert into employee values (9,'Virat','Patil','Jaipur','Staffing',34000)
+insert into employee values (10,'Sohil','Khan','Mumbai','HR',33000)
+insert into employee values (11,'Ronit','Patil','Miraj','Admin',NULL)
+
+----Clauses/filters 
+--We have Clausses in Sql to perform filter related information
+--1.Where
+--2.order by
+--3.group by
+--4.having 
+
+-1.Where
+--Where clause is used with comaprision operator,arithmatic and logical operators.
+--It used to filter the specific condition or we can select a particlar records from table.
+
+--Operators
+--1.Comaprision Operator 
+--2.Logical Operator
+--3.Arithmatic operator
+--4.IN and NOT IN
+--5.Between and NOT BETWEEN
+--6.LIKE
+
+--1.Comaprision Operator 
+--it is used to compare the condition provided in filter clauses or where clause.
+-- = - equal to
+-- > - greater than
+-- < - less than
+-- >= - greater than equal to
+-- <= - less than equal to
+-- != or <> -not equal to
+
+
+create table employee
+(EID int,
+FirstName varchar(20),
+LastName varchar(20),
+Loc varchar(20),
+Dept varchar(20),
+salary int)
+
+insert into employee values (1,'Rohan','Mane','Sangali','HR',15000)
+insert into employee values (2,'Sheetal','Chavan','Parbhani','Finance',25000)
+insert into employee values (3,'Amit','Patil','Latur','HR',16000)
+insert into employee values (4,'Riya','Verma','Pune','Account',20000)
+insert into employee values (5,'Sita','Sharma','Patna','HR',15000)
+insert into employee values (6,'Kirti','Gold','Solapur','Staffing',35000)
+insert into employee values (7,'Sohan','Jadhav','Miraj','Account',45000)
+insert into employee values (8,'Priyanka','Sharma','Nagpur','Finance',46000)
+insert into employee values (9,'Virat','Patil','Jaipur','Staffing',34000)
+insert into employee values (10,'Sohil','Khan','Mumbai','HR',33000)
+insert into employee values (11,'Ronit','Patil','Miraj','Admin',NULL)
+select * from employee where dept = 'HR'
+select * from employee where EID > 5
+select * from employee where EID < 4
+select * from employee where EID >= 7
+select * from employee where EID <= 4
+select * from employee where EID <> 7  --not equal to
+select * from employee where EID != 7  --not equal to
+
+--Logical Operator 
+--these operators are used to compare two inputs logically and provide the result.
+--1.AND
+--It will be just like multiplication 
+
+--AND oeartion
+--A		B		O/P
+--0		0		0
+--0		1		0
+--1		0		0
+--1		1		1
+
+--A			B			O/P
+--False		False		False
+--False		True		False
+--True		False		False
+--True		True		True
+
+select * from employee where eid = 1 and dept = 'Finance'
+select * from employee where EID =5 and loc ='Patna'
+
+--2.OR
+--It will work like addition
+--OR operation
+--A		B		O/P
+--0		0		0
+--0		1		1
+--1		0		1
+--1		1		1
+
+--A			B			O/P
+--False		False		False
+--False		True		True
+--True		False		True
+--True		True		True
+
+select * from employee where eid = 11 or dept = 'Finance'
+select * from employee 
+
+select * from employee where EID =5 or salary > 40000 or loc ='Pune'
+
+--3.NOT
+--It will perform Negation or Opposite operation
+
+--NOT operation
+--Input		Output
+--1			0
+--True		False
+select * from employee where eid in (3,5,7,9,1)
+select * from employee where eid not in (3,5,7,9,1)
+
+--IN and NOT IN operator 
+--This operator will allow you to navigate or point out the values which mentioned or mentioned inside the in clause.
+--Not In operator will perform vice-versa operation as compared to IN operator.
+
+select * from employee where eid => 1,2 -- incoreect syntax because comparision opeartor will allow you to insert only one condition.
+
+select * from employee where eid in (1,3,4,5)
+select * from employee where eid not in (1,3,4,5)
+
+select * from employee where loc in ('Pune','sangali','Miraj')
+select * from employee where loc not in ('Pune','sangali','Miraj')
+
+--CLASS-5
+--Between and Not between
+--This operator/ clause is used to display the values or records between the range you have specified.
+--This operator works along with AND operator.
+
+select * from employee where EID between 2 and 6
+
+select * from employee where Loc between 'Agra' and 'Miraj' --A to M cities name 
+
+select * from employee where Loc between 'A' and 'N'   --A to N
+
+--Not Between
+select * from employee where EID not between 2 and 6
+
+select * from employee where Loc not between 'Agra' and 'Miraj' --excluding A to Miraj cities name 
+
+select * from employee where Loc not between 'A' and 'N'  -- excluding A to N cities name  <=N ,ex:na,nb
+
+--Arithmatic operator 
+--these operators used to perform mathematical operation like +,-,*,/ and %
+
+select * from employee
+
+select *,MonthlyIcrement =salary+1000  from employee
+
+select *,lossofpay = 2*(salary/30) from employee
+
+select *,AnnualPackage =salary*12 from employee
+
+select *,AnnualPackage =salary*12,lossofpay = 2*(salary/30),MonthlyIcrement =salary+1000  from employee
+
+--we can concatinate or combine two columns by using '+' 
+select FirstName + ' ' + LastName from employee
+
+select FirstName + ' ' + LastName  from employee
+
+select EID +  salary   from employee -- If two columns in int then it will addition
+
+--Q.how will you display the even number of records 
+select * from employee 
+--where eid % 2 = 0
+
+--Q.how will you display the odd number of records 
+select * from employee where eid % 2 = 1
+
+
+select * from employee14
+select * from employee14 where loc='miraj'
+select * from employee14 where eid%2=0
+select *,Incr_salary=(salary+salary*15/100) from employee14 where loc='pune'
+
+select * from employee14 where salary<=20000
+select * from employee14 where firstname='Rohan' or dept='Account'
+select * from employee14 where  Not dept ='HR'
+
+select * from employee14 where salary between 10000 and 40000
+
+select * from employee14 where firstname like '[^aeiou]%'
+select * from employee14 where firstname  like '__h%'
+select * from employee14 where not firstname='Rohan'
+select dept,sum(salary) from employee14  group by dept having dept ='HR'
+
+
+

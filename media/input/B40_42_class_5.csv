@@ -1,0 +1,40 @@
+-
+
+
+--Sub query and Co-Relational Query
+--Sub query(Nested subquery)
+--Query within query i.e outer query(OQ) and inside inner query(IQ).
+--OQ and IQ is independent.
+--It follows bottom up approach
+--Inside Subquery, IQ always execute only once.
+
+select * from customer where C_ID in (select CID from orders) --(C2,C3,C1,C2,C4,C2)
+
+--Co-relational query
+--Query within query i.e outer query(OQ) and inside inner query(IQ).
+--IQ is dependent on outer query.
+--It follows top down up approach.
+
+
+
+--Q.What is the diffrence between Sub query and Co-relational query.
+-subQuery
+--outer query(inner query)
+---correlated Query--inner query depends on outer query
+
+select * from emp order by salary desc
+--Q: find out 3rd highest sal
+
+select * from emp where salary in
+(select min(salary) from emp where salary in
+(select distinct  Top 7 salary from emp order by salary desc)) 
+
+select max(salary) from emp where salary in
+(select distinct  Top 3 salary from emp order by salary )
+
+
+select Top 1* from emp where salary in
+(select distinct  Top 7 salary from emp order by salary desc)
+order by salary asc
+
+select dept,max(salary) from emp group by dept

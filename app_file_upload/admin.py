@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.http import HttpResponse
-from .models import Blog
+from .models import File
 
 
 # Register your models here.
@@ -13,4 +13,4 @@ class YourModelAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(Blog, YourModelAdmin)
+admin.site.register(File, YourModelAdmin)
